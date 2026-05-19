@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'get_thumbnail_video'
-  s.version          = '0.0.1'
+  s.version          = '0.7.3'
   s.summary          = 'A flutter plugin for creating a thumbnail from a local video file or from a video URL.'
   s.description      = <<-DESC
 A flutter plugin for creating a thumbnail from a local video file or from a video URL.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/Alberto-Monteiro/video_thumbnail'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Alberto Monteiro' => 'alberto.monteiro@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'

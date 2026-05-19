@@ -1,13 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_thumbnail_video/src/image_format.dart';
-import 'package:get_thumbnail_video/src/video_thumbnail_method_channel.dart';
 import 'package:get_thumbnail_video/video_thumbnail.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelVideoThumbnail platform = MethodChannelVideoThumbnail();
   const MethodChannel channel = MethodChannel('video_thumbnail');
 
   setUp(() {
