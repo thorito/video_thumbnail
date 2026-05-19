@@ -295,26 +295,26 @@ class _DemoHomeState extends State<DemoHome> {
             }),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+              children: const <Widget>[
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio<ImageFormat>(value: ImageFormat.JPEG),
-                    const Text('JPEG'),
+                    Text('JPEG'),
                   ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio<ImageFormat>(value: ImageFormat.PNG),
-                    const Text('PNG'),
+                    Text('PNG'),
                   ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Radio<ImageFormat>(value: ImageFormat.WEBP),
-                    const Text('WebP'),
+                    Text('WebP'),
                   ],
                 ),
               ],
