@@ -2,12 +2,17 @@
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
-#if __has_include("webp/decode.h") && __has_include("webp/encode.h") && __has_include("webp/demux.h") && __has_include("webp/mux.h")
+#if __has_include(<libwebp/decode.h>) && __has_include(<libwebp/encode.h>) && __has_include(<libwebp/demux.h>) && __has_include(<libwebp/mux.h>)
+#import <libwebp/decode.h>
+#import <libwebp/encode.h>
+#import <libwebp/demux.h>
+#import <libwebp/mux.h>
+#elif __has_include("webp/decode.h") && __has_include("webp/encode.h") && __has_include("webp/demux.h") && __has_include("webp/mux.h")
 #import "webp/decode.h"
 #import "webp/encode.h"
 #import "webp/demux.h"
 #import "webp/mux.h"
-#elif __has_include(<libwebp/decode.h>) && __has_include(<libwebp/encode.h>) && __has_include(<libwebp/demux.h>) && __has_include(<libwebp/mux.h>)
+#else
 #import <libwebp/decode.h>
 #import <libwebp/encode.h>
 #import <libwebp/demux.h>
@@ -48,7 +53,12 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             //Background Thread
-            result([VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality]);
+            NSData *data = [VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality];
+            if (data == nil) {
+                result([FlutterError errorWithCode:@"THUMBNAIL_ERROR" message:@"Failed to generate thumbnail" details:nil]);
+            } else {
+                result(data);
+            }
         });
 
     } else if ([@"file" isEqualToString:call.method]) {
@@ -61,6 +71,10 @@
             //Background Thread
 
             NSData *data = [VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality];
+            if (data == nil) {
+                result([FlutterError errorWithCode:@"THUMBNAIL_ERROR" message:@"Failed to generate thumbnail" details:nil]);
+                return;
+            }
             NSString *ext = ((format == 0) ? @"jpg" : (format == 1) ? @"png" : @"webp");
             NSURL *thumbnail = [[url URLByDeletingPathExtension] URLByAppendingPathExtension:ext];
 
