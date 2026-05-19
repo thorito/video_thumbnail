@@ -24,7 +24,7 @@ void main() {
   });
 
   test('thumbnailData', () async {
-    final XFile result = await VideoThumbnail.thumbnailFile(
+    final XFile? result = await VideoThumbnail.thumbnailFile(
       video: 'video',
       thumbnailPath: 'path',
       imageFormat: ImageFormat.JPEG,
@@ -33,6 +33,6 @@ void main() {
       quality: 45,
     );
 
-    expect(result.path, 'file=video:path:0:123:45');
+    expect(result?.path, 'file=video:path:0:123:45');
   });
 }

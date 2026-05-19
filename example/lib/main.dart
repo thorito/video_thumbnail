@@ -78,6 +78,10 @@ Future<ThumbnailResult> genThumbnail(ThumbnailRequest r) async {
 
     debugPrint('thumbnail file is located: $thumbnailFile');
 
+    if (thumbnailFile == null) {
+      throw Exception('Failed to generate thumbnail file');
+    }
+
     bytes = await thumbnailFile.readAsBytes();
   } else {
     bytes = await VideoThumbnail.thumbnailData(
@@ -293,9 +297,9 @@ class _DemoHomeState extends State<DemoHome> {
               _format = v!;
               _editNode.unfocus();
             }),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const <Widget>[
+              children: <Widget>[
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

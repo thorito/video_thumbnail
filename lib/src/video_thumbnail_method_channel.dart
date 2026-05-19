@@ -11,7 +11,7 @@ class MethodChannelVideoThumbnail extends VideoThumbnailPlatform {
   final methodChannel = const MethodChannel('video_thumbnail');
 
   @override
-  Future<XFile> thumbnailFile({
+  Future<XFile?> thumbnailFile({
     required String video,
     required Map<String, String>? headers,
     required String? thumbnailPath,
@@ -33,7 +33,8 @@ class MethodChannelVideoThumbnail extends VideoThumbnailPlatform {
     };
 
     final path = await methodChannel.invokeMethod<String>('file', reqMap);
-    return XFile(path!);
+    if (path == null) return null;
+    return XFile(path);
   }
 
   @override
