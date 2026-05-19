@@ -53,7 +53,12 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             //Background Thread
-            result([VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality]);
+            NSData *data = [VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality];
+            if (data == nil) {
+                result([FlutterError errorWithCode:@"THUMBNAIL_ERROR" message:@"Failed to generate thumbnail" details:nil]);
+            } else {
+                result(data);
+            }
         });
 
     } else if ([@"file" isEqualToString:call.method]) {
@@ -66,6 +71,10 @@
             //Background Thread
 
             NSData *data = [VideoThumbnailPlugin generateThumbnail:url headers:headers format:format maxHeight:maxh maxWidth:maxw timeMs:timeMs quality:quality];
+            if (data == nil) {
+                result([FlutterError errorWithCode:@"THUMBNAIL_ERROR" message:@"Failed to generate thumbnail" details:nil]);
+                return;
+            }
             NSString *ext = ((format == 0) ? @"jpg" : (format == 1) ? @"png" : @"webp");
             NSURL *thumbnail = [[url URLByDeletingPathExtension] URLByAppendingPathExtension:ext];
 

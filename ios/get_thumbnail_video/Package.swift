@@ -10,11 +10,12 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "get_thumbnail_video",
+            name: "get-thumbnail-video",
             targets: ["get_thumbnail_video"]
         ),
     ],
     dependencies: [
+        .package(name: "FlutterFramework", path: "../FlutterFramework"),
         .package(
             url: "https://github.com/SDWebImage/libwebp-Xcode",
             from: "1.3.2"
@@ -24,14 +25,15 @@ let package = Package(
         .target(
             name: "get_thumbnail_video",
             dependencies: [
+                .product(name: "FlutterFramework", package: "FlutterFramework"),
                 .product(name: "libwebp", package: "libwebp-Xcode"),
             ],
             path: ".",
             sources: ["Classes"],
-            publicHeadersPath: "Classes",
             resources: [
-                .process("Resources/PrivacyInfo.xcprivacy"),
+                .process("Resources"),
             ],
+            publicHeadersPath: "Classes",
             cSettings: [
                 .headerSearchPath("Classes"),
             ]

@@ -13,8 +13,8 @@ A flutter plugin for creating a thumbnail from a local video file or from a vide
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Alberto Monteiro' => 'alberto.monteiro@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
-  s.public_header_files = 'Classes/**/*.h'
+  s.source_files = 'get_thumbnail_video/Classes/**/*'
+  s.public_header_files = 'get_thumbnail_video/Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'libwebp'
   s.platform = :ios, '12.0'
@@ -27,9 +27,5 @@ A flutter plugin for creating a thumbnail from a local video file or from a vide
   }
   s.swift_version = '5.0'
 
-  # If your plugin requires a privacy manifest, for example if it uses any
-  # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
-  # plugin's privacy impact, and then uncomment this line. For more information,
-  # see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-  s.resource_bundles = {'get_thumbnail_video_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
+  s.resource_bundles = {'get_thumbnail_video_privacy' => ['get_thumbnail_video/Resources/PrivacyInfo.xcprivacy']}
 end
